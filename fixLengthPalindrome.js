@@ -11,17 +11,16 @@ console.log('hello world')
 let generator = function(intLength){
     var foo = [];
 
-    for (var i = intLength-intLength +1; i <= intLength; i++) {
-        foo.push(i);
+    for (var i = 1; i <= intLength; i++) {
+        const a = i.toString().split('').join('');
+        const b = i.toString().split('').reverse().join('')
+        if (a === b) {
+            foo.push(i)
+        }
+         
     }
-    console.log(foo)
-    
-    for(element in foo){
-        console.log(typeof element)
-        console.log(typeof foo)
-    }
+    return foo;
 }
-
 
 
 // var kthPalindrome = function(queries, intLength) {
