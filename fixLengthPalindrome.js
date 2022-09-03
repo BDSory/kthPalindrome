@@ -20,6 +20,7 @@
  var kthPalindrome = function( queries, intLength) {
     var foo = [];
     let resultArray = [];
+    let orderedQueries = [];
     const map1 = new Map();
     map1.set
         ('1' , 1).set
@@ -46,7 +47,9 @@
         }  
     };
     console.log(foo)
-    return queries.map(i => foo[i-1]);
+    orderedQueries = queries.sort((a,b) => a -b)
+    console.log(orderedQueries)
+    return orderedQueries.map(i => foo[i-1] ?? -1);
  
  }
 
