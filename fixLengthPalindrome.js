@@ -17,8 +17,9 @@
  * @param {number} intLength
  * @return {number[]}
  */
- var kthPalindrome = function( intLength) {
+ var kthPalindrome = function( queries, intLength) {
     var foo = [];
+    let resultArray = [];
     const map1 = new Map();
     map1.set
         ('1' , 1).set
@@ -28,16 +29,17 @@
         ('5' , 10000).set
         ('6' , 100000).set
         ('7' , 1000000)
-    console.log(map1.get((1+intLength).toString()))
+   
     for (var i = map1.get(intLength.toString()); i < map1.get((intLength+1).toString()); i++) {
         const a = i.toString().split('').join('');
         const b = i.toString().split('').reverse().join('')
         if (a === b) {
             foo.push(i)
         }  
-    
     };
-    return foo;
+    
+    return queries.map(i => foo[i]);
+ 
  }
 
 
