@@ -37,8 +37,8 @@
             foo.push(i)
         }  
     };
-    
-    return queries.map(i => foo[i]);
+    console.log(foo)
+    return queries.map(i => foo[i-1]);
  
  }
 
