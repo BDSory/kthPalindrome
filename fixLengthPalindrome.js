@@ -1,13 +1,11 @@
-//7-39 produces valid, expected outputs but fails to exceed undefined performance specification in Leetcode. From 41 will be a second attempt. Intuition: 
+/*7-40 produces valid, expected outputs but fails to exceed undefined performance specification in Leetcode. From 41 will be a second attempt. Intuition: the for loop is building an array of every palindrome from map1.set intLength to intLength +1 BEFORE it checks queries. Maybe: populate an array with every number between intL and intL+1; then take each queries index, go to that number, check for palindromeness, push or -1.*/
 /**
  * @param {number[]} queries
  * @param {number} intLength
  * @return {number[]}
  */
- var kthPalindrome = function( queries, intLength) {
-    var foo = [];
-    let resultArray = [];
-    let orderedQueries = [];
+ let kthPalindrome = function( queries, intLength) {
+    const foo = [];
     const map1 = new Map();
     map1.set
         ('1' , 1).set
@@ -25,18 +23,39 @@
         ('13', 1000000000000).set
         ('14', 10000000000000).set
         ('15', 100000000000000)
-   
+  
+    const isPalindrome = x => {
+    if (x < 0) return false
+  
+    let reversed = 0, y = x
+  
+    while (y > 0) {
+        const lastDigit = y % 10
+        reversed = (reversed * 10) + lastDigit
+        y = (y / 10) | 0
+    }
+    return x === reversed
+    }
+  
     for (var i = map1.get(intLength.toString()); i < map1.get((intLength+1).toString()); i++) {
-        const a = i.toString().split('').join('');
-        const b = i.toString().split('').reverse().join('')
-        if (a === b) {
+        if(isPalindrome(i)){
             foo.push(i)
-        }  
+        }
     };
-    console.log(foo)
-    //orderedQueries = queries.sort((a,b) => a -b)
-    //console.log(orderedQueries)
-    return queries.map(i => foo[i-1] ?? -1);
- 
- }
-
+    
+    const isInRange = x => {
+        if(x < map1.get(intLength.toString()) || x > map1.get((intLength+1).toString())){
+            return false;
+        }
+        return true;
+      };
+    for(let i = 0; i < queries.length; i++) {
+        if(isInRange(i)){
+          queries.push(i)
+        }
+    
+      return queries.map(i => foo[i-1] ?? -1);  
+    }
+  
+    
+    }
