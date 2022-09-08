@@ -5,25 +5,26 @@
  * @return {number[]}
  */
  let kthPalindrome = function( queries, intLength) {
-    const foo = [];
-    const map1 = new Map();
-    map1.set
-        ('1' , 1).set
-        ('2' , 10).set
-        ('3' , 100).set
-        ('4' , 1000).set
-        ('5' , 10000).set
-        ('6' , 100000).set
-        ('7' , 1000000).set
-        ('8' , 10000000).set
-        ('9' , 100000000).set
-        ('10', 1000000000).set
-        ('11', 10000000000).set
-        ('12', 100000000000).set
-        ('13', 1000000000000).set
-        ('14', 10000000000000).set
-        ('15', 100000000000000)
-  
+    let foo = [];
+    let revisedArray = [];
+    const numbersLengths = {
+        1 : 1,
+        2 : 10,
+        3 : 100,
+        4 : 1000,
+        5 : 10000,
+        6 : 100000, 
+        7 : 1000000,
+        8 : 10000000,
+        9 : 100000000,
+        10: 1000000000,
+        11: 10000000000,
+        12: 100000000000,
+        13: 1000000000000,
+        14: 10000000000000,
+        15: 100000000000000
+    }
+    
     const isPalindrome = x => {
     if (x < 0) return false
   
@@ -36,26 +37,45 @@
     }
     return x === reversed
     }
-  
-    for (var i = map1.get(intLength.toString()); i < map1.get((intLength+1).toString()); i++) {
+    
+
+    for (var i = numbersLengths[intLength]; i < numbersLengths[intLength + 1]; i++) {
+    
         if(isPalindrome(i)){
             foo.push(i)
-        }
+        }   
     };
+    console.log(foo)
     
-    const isInRange = x => {
-        if(x < map1.get(intLength.toString()) || x > map1.get((intLength+1).toString())){
-            return false;
+    for(query of queries) {
+        if(query >= numbersLengths[intLength + 1]) {
+            query = -1;
+            revisedArray.push(query)
+        } else {
+            revisedArray.push(query)  
         }
-        return true;
-      };
-    for(let i = 0; i < queries.length; i++) {
-        if(isInRange(i)){
-          queries.push(i)
-        }
-    
-      return queries.map(i => foo[i-1] ?? -1);  
     }
-  
-    
-    }
+    console.log(revisedArray)
+    return revisedArray.map(i => foo[i-1] ?? -1); 
+      
+ }  
+
+
+
+//  const map1 = new Map();
+//  map1.set
+    //  ('1' , 1).set
+    //  ('2' , 10).set
+    //  ('3' , 100).set
+    //  ('4' , 1000).set
+    //  ('5' , 10000).set
+    //  ('6' , 100000).set
+    //  ('7' , 1000000).set
+    //  ('8' , 10000000).set
+    //  ('9' , 100000000).set
+    //  ('10', 1000000000).set
+    //  ('11', 10000000000).set
+    //  ('12', 100000000000).set
+    //  ('13', 1000000000000).set
+    //  ('14', 10000000000000).set
+    //  ('15', 100000000000000)
